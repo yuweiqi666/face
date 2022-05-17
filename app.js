@@ -14,6 +14,9 @@ Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri('./models'),
   faceapi.nets.faceExpressionNet.loadFromUri('./models'),
 ]).then(startVideo())
+  .catch(err => {
+    console.log('catch err', err)
+  })
 
 video.addEventListener('play', () => {
   const canvas = faceapi.createCanvasFromMedia(video)
