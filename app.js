@@ -1,5 +1,7 @@
 const video = document.querySelector('#video')
 
+let expressions = {}
+
 const startVideo = () => {
   navigator.getUserMedia(
     { video: {} },
@@ -36,6 +38,10 @@ video.addEventListener('play', () => {
       .withFaceLandmarks()
       .withFaceExpressions()
 
+    expressions = detections[0]?.expressions
+
+    console.log('expressions', expressions)
+
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
 
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
@@ -62,9 +68,25 @@ Webcam.attach('#my_camera');
 
 function handlePhoto () {
   Webcam.snap(function (data_uri) {
+    const div = document.createElement('div')
+    // console.log('expressions', expressions)
+    for (let key in expressions) {
+      if (!expressions.hasOwnProperty(key)) continue
+      div.innerHTML += `
+        <div class='face-data-item'>
+          <div style='font-weight: 700;'>${key} :</div>
+          <div style='margin-left: 10px;'>${expressions[key]}<div>
+        </div>
+      `
+    }
     // display results in page
     document.getElementById('results').innerHTML =
-      '<h2>Here is your image:</h2>' +
-      '<img src="' + data_uri + '"/>';
+      ` 
+      <h2>Here is your image:</h2>
+      <div class='face-wrapper'> 
+        <img class='face-image' src="${data_uri}" width='320' height='240'/>
+        <div class='face-data'>${div.innerHTML}</div>
+      </div>
+    `
   });
 }
