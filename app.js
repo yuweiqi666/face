@@ -4,11 +4,14 @@ let expressions = {}
 
 let isMobile = false
 
+let mediaHeight
+
 const fileInput = document.querySelector('input.select-file')
 
 fileInput.addEventListener('change', function () {
-  console.log('文件更新', this.value)
-  video.src = this.value
+  var files = this.files[0];
+  var url = URL.createObjectURL(files);
+  video.src = url;
   video.load()
 })
 
@@ -40,6 +43,7 @@ video.addEventListener('canplay', function () {
   } else {
     this.width = 375
     this.height = (this.videoHeight / this.videoWidth) * 375
+    mediaHeight = (this.videoHeight / this.videoWidth) * 375
   }
 });
 
@@ -72,6 +76,13 @@ Promise.all([
   })
 
 video.addEventListener('play', () => {
+  const content = document.querySelector('.video-content')
+
+  if (content.querySelector('canvas')) {
+    content.removeChild(content.querySelector('canvas'))
+  }
+
+
   const canvas = faceapi.createCanvasFromMedia(video)
   const videoContent = document.querySelector('.video-content')
   videoContent.append(canvas)
@@ -116,9 +127,25 @@ Webcam.set({
 });
 Webcam.attach('#my_camera');
 
+let self = this
 
 function handlePhoto () {
   Webcam.snap(function (data_uri) {
+    if (isMobile) {
+      const canvas = document.createElement("canvas");
+      const canvasCtx = canvas.getContext("2d")
+      const ratio = window.devicePixelRatio || 1;
+      canvasCtx.scale(ratio, ratio);
+      canvas.width = 375;
+      canvas.height = mediaHeight;
+      console.log('width', canvas.width)
+      console.log('height', canvas.height)
+      canvasCtx.drawImage(video, 0, 0, canvas.width, canvas.height)
+      const imgBase64 = canvas.toDataURL("image/png");
+
+      data_uri = imgBase64
+    }
+
     const div1 = document.createElement('div')
     const div2 = document.createElement('div')
     for (let key in expressions) {
@@ -144,7 +171,7 @@ function handlePhoto () {
       ` 
       <h2>Here is your image:</h2>
       <div class='face-wrapper'> 
-        <img class='face-image' src="${data_uri}" width='320' height='240'/>
+        <img class='face-image' src="${data_uri}" width='375' height='${mediaHeight}'/>
         <div class='face-data' style='display: flex; justify-content: center; flex-wrap: wrap'>
           <div class='face-data1' style='float: left; margin-bottom: 10px;'>
             ${div1.innerHTML}
@@ -167,11 +194,6 @@ function handlePhoto () {
       faceDom.nextElementSibling.className = `${faceStr}-color`
 
     })
-
-
-
-
-
 
   });
 }
