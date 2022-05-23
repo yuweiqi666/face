@@ -13,6 +13,7 @@ fileInput.addEventListener('change', function () {
   var url = URL.createObjectURL(files);
   video.src = url;
   video.load()
+  video.play()
 })
 
 
