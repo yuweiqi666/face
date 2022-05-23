@@ -61,6 +61,12 @@ const startVideo = () => {
   )
 }
 
+async function t () {
+  await faceapi.loadTinyFaceDetectorModel('./models')
+}
+
+t()
+
 Promise.all([
   faceapi.nets.tinyFaceDetector.loadFromUri('./models'),
   faceapi.nets.faceLandmark68Net.loadFromUri('./models'),
