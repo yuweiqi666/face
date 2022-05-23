@@ -12,8 +12,8 @@ fileInput.addEventListener('change', function () {
   var files = this.files[0];
   var url = URL.createObjectURL(files);
   video.src = url;
-  video.load()
-  video.play()
+  // video.load()
+  // video.play()
   // video.controls = 'controls'
 })
 
