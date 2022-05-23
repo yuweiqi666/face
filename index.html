@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Document123</title>
     <style>
       body {
         margin: 0;
@@ -14,17 +14,26 @@
         /* display: flex;
       justify-content: center; */
         /* align-items: center; */
+        display: flex;
+        flex-direction: column;
       }
       .video-content {
         position: relative;
-        width: 720px;
-        height: 560px;
+        /* width: 720px;
+        height: 560px; */
         margin: 0 auto;
       }
       canvas {
         position: absolute;
-        left: 0;
-        right: 0;
+        left: 50%;
+        transform: translate(-50%);
+        top: 0;
+      }
+      video {
+        /* position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        top: 0; */
       }
       #results {
         text-align: center;
@@ -48,9 +57,9 @@
         border-color: #66b1ff;
       }
       .face-wrapper {
-        display: flex;
+        /* display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: center; */
       }
       .face-data {
         display: flex;
@@ -94,11 +103,19 @@
     </style>
   </head>
   <body>
-    <div class="video-content">
-      <video id="video" width="720" height="560" autoplay muted></video>
+    <div style="display: flex; justify-content: center">
+      <div class="video-content">
+        <video id="video" width="720" height="560" autoplay muted loop></video>
+      </div>
     </div>
     <div style="text-align: center">
       <button>yeah～</button>
+      <input
+        class="select-file"
+        type="file"
+        accept="video/*"
+        capture="camcorder"
+      />
     </div>
     <div id="my_camera" style="display: none"></div>
     <div id="results"></div>

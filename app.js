@@ -2,6 +2,51 @@ const video = document.querySelector('#video')
 
 let expressions = {}
 
+let isMobile = false
+
+const fileInput = document.querySelector('input.select-file')
+
+fileInput.addEventListener('change', function () {
+  console.log('文件更新', this.value)
+  video.src = this.value
+  video.load()
+})
+
+
+function browserRedirect () {
+  var sUserAgent = navigator.userAgent.toLowerCase();
+  var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+  var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+  var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+  var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+  var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+  var bIsAndroid = sUserAgent.match(/android/i) == "android";
+  var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+  var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+  if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    console.log('跳转移动端页面')
+    isMobile = true
+  } else {
+    console.log('跳转pc端页面')
+    isMobile = false
+  }
+}
+browserRedirect();
+
+video.addEventListener('canplay', function () {
+  if (!isMobile) {
+    this.width = 720;
+    this.height = 560;
+  } else {
+    this.width = 375
+    this.height = (this.videoHeight / this.videoWidth) * 375
+  }
+});
+
+
+
+
+
 const startVideo = () => {
   navigator.getUserMedia(
     { video: {} },
@@ -15,7 +60,13 @@ Promise.all([
   faceapi.nets.faceLandmark68Net.loadFromUri('./models'),
   faceapi.nets.faceRecognitionNet.loadFromUri('./models'),
   faceapi.nets.faceExpressionNet.loadFromUri('./models'),
-]).then(startVideo())
+]).then((function () {
+  if (!isMobile) {
+    return startVideo()
+  } else {
+    // video.src = './example/01.mp4'
+  }
+})())
   .catch(err => {
     console.log('catch err', err)
   })
@@ -94,11 +145,11 @@ function handlePhoto () {
       <h2>Here is your image:</h2>
       <div class='face-wrapper'> 
         <img class='face-image' src="${data_uri}" width='320' height='240'/>
-        <div class='face-data'>
-          <div class='face-data1'>
+        <div class='face-data' style='display: flex; justify-content: center; flex-wrap: wrap'>
+          <div class='face-data1' style='float: left; margin-bottom: 10px;'>
             ${div1.innerHTML}
           </div>
-          <div class='face-data2'>
+          <div class='face-data2' style='float: left; margin-bottom: 10px;'>
             ${div2.innerHTML}
           </div>
         </div>
