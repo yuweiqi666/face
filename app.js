@@ -14,7 +14,7 @@ fileInput.addEventListener('change', function () {
   video.src = url;
   video.load()
   video.play()
-  video.controls = 'controls'
+  // video.controls = 'controls'
 })
 
 
