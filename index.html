@@ -1,109 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100vw;
-      height: 100vh;
-      /* display: flex;
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        /* display: flex;
       justify-content: center; */
-      /* align-items: center; */
-    }
-    .video-content {
-      position: relative;
-      width: 720px;
-      height: 560px;
-      margin: 0 auto;
-    }
-    canvas {
-      position: absolute;
-      left: 0;
-      right: 0;
-    }
-    #results {
-      text-align: center;
-    }
-    button {
-      border: 1px solid #409eff;
-      /* width: 56px; */
-      /* height: 14px; */
-      line-height: 14px;
-      padding: 12px 20px;
-      background: #409eff;
-      /* border-color: #409eff; */
-      box-sizing: border-box;
-      font-size: 16px;
-      color: #fff;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #66b1ff;
-      border-color: #66b1ff;
-    }
-    .face-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .face-data {
-      display: flex;
-    }
-    .face-data1 {
-      margin-right: 30px;
-    }
-    .face-data-item {
-      display: flex;
-    }
-    .face-image {
-      margin-right: 20px;
-    }
+        /* align-items: center; */
+      }
+      .video-content {
+        position: relative;
+        width: 720px;
+        height: 560px;
+        margin: 0 auto;
+      }
+      canvas {
+        position: absolute;
+        left: 0;
+        right: 0;
+      }
+      #results {
+        text-align: center;
+      }
+      button {
+        border: 1px solid #409eff;
+        /* width: 56px; */
+        /* height: 14px; */
+        line-height: 14px;
+        padding: 12px 20px;
+        background: #409eff;
+        /* border-color: #409eff; */
+        box-sizing: border-box;
+        font-size: 16px;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #66b1ff;
+        border-color: #66b1ff;
+      }
+      .face-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .face-data {
+        display: flex;
+      }
+      .face-data1 {
+        margin-right: 30px;
+      }
+      .face-data-item {
+        display: flex;
+      }
+      .face-image {
+        margin-right: 20px;
+      }
 
-    .neutral-color {
-      color: #877830
-    }
+      .neutral-color {
+        color: #877830;
+      }
 
-    .happy-color {
-      color: #EABC4A
-    }
+      .happy-color {
+        color: #eabc4a;
+      }
 
-    .sad-color {
-      color: #A39C41;
-    }
-    .angry-color {
-      color: #A07551;
-    }
+      .sad-color {
+        color: #a39c41;
+      }
+      .angry-color {
+        color: #a07551;
+      }
 
-    .fearful-color {
-      color: #AFAFAF;
-    }
+      .fearful-color {
+        color: #afafaf;
+      }
 
-    .disgusted-color {
-      color: #BDA845;
-    }
+      .disgusted-color {
+        color: #bda845;
+      }
 
-    .surprised-color {
-      color: #BC8A3A;
-    }
-  </style>
-</head>
-<body>
-  <div class="video-content">
-    <video id="video" width="720" height="560" autoplay muted></video>
-  </div>
-  <div style="text-align: center;">
-    <button>yeah～</button>
-  </div>
-  <div id="my_camera" style="display:none"></div>
-  <div id="results"></div>
-  <script src="./face-api.min.js"></script>
-  <script src="./webcam.min.js"></script>
-  <script src="./app.js"></script>
-</body>
+      .surprised-color {
+        color: #bc8a3a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-content">
+      <video id="video" width="720" height="560" autoplay muted></video>
+    </div>
+    <div style="text-align: center">
+      <button>yeah～</button>
+    </div>
+    <div id="my_camera" style="display: none"></div>
+    <div id="results"></div>
+    <input type="file" accept="image/*" capture="user" />
+    <script src="./face-api.min.js"></script>
+    <script src="./webcam.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
 </html>
