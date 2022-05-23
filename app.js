@@ -40,7 +40,7 @@ video.addEventListener('play', () => {
 
     expressions = detections[0]?.expressions
 
-    console.log('expressions', expressions)
+    // console.log('expressions', expressions)
 
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
 
@@ -68,14 +68,23 @@ Webcam.attach('#my_camera');
 
 function handlePhoto () {
   Webcam.snap(function (data_uri) {
-    const div = document.createElement('div')
-    // console.log('expressions', expressions)
+    const div1 = document.createElement('div')
+    const div2 = document.createElement('div')
     for (let key in expressions) {
       if (!expressions.hasOwnProperty(key)) continue
-      div.innerHTML += `
+      div1.innerHTML += `
         <div class='face-data-item'>
-          <div style='font-weight: 700;'>${key} :</div>
-          <div style='margin-left: 10px;'>${expressions[key]}<div>
+          <div class='face-data-item-name' style='font-weight: 700;'>${key} :</div>
+          <div style='margin-left: 10px;'>${(Number(expressions[key]) * 100).toFixed(1) + '%'}</div>
+        </div>
+      `
+    }
+    for (let key in expressions) {
+      if (!expressions.hasOwnProperty(key)) continue
+      div2.innerHTML += `
+        <div class='face-data-item'>
+          <div class='face-data-item-name' style='font-weight: 700;'>${key} :</div>
+          <div style='margin-left: 10px;'>${expressions[key]}</div>
         </div>
       `
     }
@@ -85,8 +94,33 @@ function handlePhoto () {
       <h2>Here is your image:</h2>
       <div class='face-wrapper'> 
         <img class='face-image' src="${data_uri}" width='320' height='240'/>
-        <div class='face-data'>${div.innerHTML}</div>
+        <div class='face-data'>
+          <div class='face-data1'>
+            ${div1.innerHTML}
+          </div>
+          <div class='face-data2'>
+            ${div2.innerHTML}
+          </div>
+        </div>
       </div>
     `
+
+    const faceNameDomList = document.getElementById('results').querySelectorAll('.face-data-item-name')
+    console.log('faceNameDom', faceNameDomList)
+
+    faceNameDomList.forEach(function (faceDom) {
+      let faceStr = faceDom.innerHTML.replace(' :', '')
+
+      faceDom.className = `face-data-item-name ${faceStr}-color`
+
+      faceDom.nextElementSibling.className = `${faceStr}-color`
+
+    })
+
+
+
+
+
+
   });
 }
