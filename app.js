@@ -78,11 +78,11 @@ Promise.all([
   })
 
 video.addEventListener('play', () => {
-  const content = document.querySelector('.video-content')
+  // const content = document.querySelector('.video-content')
 
-  if (content.querySelector('canvas')) {
-    content.removeChild(content.querySelector('canvas'))
-  }
+  // if (content.querySelector('canvas')) {
+  //   content.removeChild(content.querySelector('canvas'))
+  // }
 
 
   const canvas = faceapi.createCanvasFromMedia(video)
