@@ -117,7 +117,17 @@ video.addEventListener('play', () => {
 })
 
 
-var btn = document.querySelector('button')
+var btn = document.querySelector('button.one')
+
+var btn2 = document.querySelector('button.two')
+
+
+
+btn2.addEventListener('click', function () {
+  fileInput.click()
+})
+
+
 
 btn.addEventListener('click', handlePhoto)
 
