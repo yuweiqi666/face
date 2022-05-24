@@ -161,12 +161,12 @@ function handlePhoto () {
     }
     for (let key in expressions) {
       if (!expressions.hasOwnProperty(key)) continue
-      div2.innerHTML += `
-        <div class='face-data-item'>
-          <div class='face-data-item-name' style='font-weight: 700;'>${key} :</div>
-          <div style='margin-left: 10px;'>${expressions[key]}</div>
-        </div>
-      `
+      // div2.innerHTML += `
+      //   <div class='face-data-item'>
+      //     <div class='face-data-item-name' style='font-weight: 700;'>${key} :</div>
+      //     <div style='margin-left: 10px;'>${expressions[key]}</div>
+      //   </div>
+      // `
     }
     // display results in page
     document.getElementById('results').innerHTML =
@@ -177,9 +177,6 @@ function handlePhoto () {
         <div class='face-data' style='display: flex; justify-content: center; flex-wrap: wrap'>
           <div class='face-data1' style='float: left; margin-bottom: 10px;'>
             ${div1.innerHTML}
-          </div>
-          <div class='face-data2' style='float: left; margin-bottom: 10px;'>
-            ${div2.innerHTML}
           </div>
         </div>
       </div>
